@@ -1,52 +1,72 @@
 package com.pcwerk.seck.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.sax.Link;
 
-public class WebDocument {
-	private String url;
-	private String hash;
-	private String location;
-	private String content;
-	private List<Link> links;
-	private Metadata metadata;
-	
-	public WebDocument()
-	{
-		url = "";
-		hash = "";
-		location = "";
-		links = new ArrayList<Link>();
-	    metadata = null;
-	}
+public class WebDocument implements Serializable {
 
-	public String getUrl() {
-		return url;
-	}
+    private static final long serialVersionUID = 1L;
+    private String url;
+    private LinkedList<String> linkURIs;
+    private List<Link> links;
+    private String content;
+    
+    private String hash;
+    private String location;
+    private Metadata metadata;    
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public WebDocument() {
+        url = null;
+        linkURIs = new LinkedList<String>();
+        links = new ArrayList<Link>();
+        content = null;
+        
+        hash = "";
+        location = "";
+        metadata = null;        
+    }
 
-	public String getHash() {
-		return hash;
-	}
+    public void setUrl(String URL) {
+        this.url = URL;
+    }
 
-	public void setHash(String hash) {
-		this.hash = hash;
-	}
+    public void setLinkURIs(LinkedList<String> links) {
+        for (String str : links) {
+            if (!this.linkURIs.contains(str)) {
+                this.linkURIs.add(str);
+                this.links.add(new Link(null, str , null, null, null) );
+            }
+        }
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	
+    public LinkedList<String> getLinkURIs() {
+        return linkURIs;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 	public List<Link> getLinks() {
 		return links;
 	}
@@ -55,14 +75,14 @@ public class WebDocument {
 		this.links = links;
 	}
 
-	public Metadata getMetadata() {
-		return metadata;
-	}
+    public Metadata getMetadata() {
+        return metadata;
+    }
 
-	public void setMetadata(Metadata metadata) {
-		this.metadata = metadata;
-	}
-
+    public void setMetadata(Metadata metadata) {
+        this.metadata = metadata;
+    }
+    
 	public String getContent() {
 		return content;
 	}
@@ -81,5 +101,5 @@ public class WebDocument {
 			return true;
 		return false;
 	}
-	
+    
 }
