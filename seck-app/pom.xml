@@ -2,10 +2,11 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <groupId>com.pcwerk</groupId>
     <artifactId>seck</artifactId>
-    <version>0.0.3-rc</version>
+    <version>0.0.6-dev</version>
   </parent>
 
   <artifactId>seck-app</artifactId>
@@ -13,56 +14,84 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.0</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <finalName>${project.artifactId}-${project.version}</finalName>
-          <createDependencyReducedPom>false</createDependencyReducedPom>
-          <artifactSet>
-             <excludes>
-               <exclude>classworlds:classworlds</exclude>
-               <exclude>junit:junit</exclude>
-               <exclude>jmock:*</exclude>
-               <exclude>*:xml-apis</exclude>
-               <exclude>org.apache.maven:lib:tests</exclude>
-               <exclude>log4j:log4j:jar:</exclude>
-             </excludes>
-           </artifactSet>
-           <transformers>
-             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-               <mainClass>com.pcwerk.seck.CommandLineSearch</mainClass>
-             </transformer>
-           </transformers>
-        </configuration>
-      </plugin>
+
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <configuration>
+        <descriptors>
+          <descriptor>src/assembly/exe.xml</descriptor>
+        </descriptors>
+        <archive>
+          <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+        </archive>
+      </configuration>
+    </plugin>
+
     </plugins>
   </build>
 
   <dependencies>
+
     <dependency>
        <groupId>gnu.getopt</groupId>
        <artifactId>java-getopt</artifactId>
-       <version>1.0.13</version>
+       <scope>compile</scope>
     </dependency> 
+
     <dependency>
        <groupId>com.pcwerk</groupId>
        <artifactId>seck-lib</artifactId>
+       <scope>compile</scope>
      </dependency>
+
      <dependency>
        <groupId>junit</groupId>
        <artifactId>junit</artifactId>
        <scope>test</scope>
      </dependency>
+  
+     <dependency>
+       <groupId>com.googlecode.juniversalchardet</groupId>
+       <artifactId>juniversalchardet</artifactId>
+       <scope>compile</scope>
+     </dependency>
+   
+     <dependency>
+       <groupId>org.ccil.cowan.tagsoup</groupId>
+       <artifactId>tagsoup</artifactId>
+       <scope>compile</scope>
+     </dependency>
+   
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>zookeeper</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parsers</artifactId>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
 </project>
+

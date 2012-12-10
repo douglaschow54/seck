@@ -28,6 +28,7 @@ public class FileSearch {
         }
       }
     }
+    input.close();
     return count;
   }
 }

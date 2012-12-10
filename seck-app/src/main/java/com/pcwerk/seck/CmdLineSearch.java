@@ -6,17 +6,10 @@ import java.util.ArrayList;
 import com.pcwerk.seck.file.FileSearch;
 import com.pcwerk.seck.file.FileWalker;
 
-public class CommandLineSearch 
+public class CmdLineSearch 
 {
-  public static void main(String[] args) {
 
-    if (args.length < 2) {
-      System.out.println("usage: CommandLineSearch <path> <search word>");
-    }
-
-    String path = args[0];
-    String needle = args[1];
-
+  public void run(String path, String needle) {
     ArrayList<File> fileList = new ArrayList<File>();
 
     FileWalker fileWalker = new FileWalker();

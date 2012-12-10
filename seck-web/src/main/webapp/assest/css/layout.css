@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+*{  
+   margin:0;  
+   padding:0;  
+}  
+  
+body{  
+   text-align:center; 
+}  
+  
+#wrapper{  
+   width:800px;  
+   margin:15% auto;  
+   text-align:CENTER;  
+}
+#wrapper input{
+	padding:6px 3px;
+	}
+#wrapper h1{
+	font-size:400%;
+	text-shadow: 2px 2px gray;
+	
+	}

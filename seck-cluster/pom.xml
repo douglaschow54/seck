@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.pcwerk</groupId>
+    <artifactId>seck</artifactId>
+    <version>0.0.6-dev</version>
+  </parent>
+
+  <artifactId>seck-cluster</artifactId>
+  <packaging>jar</packaging>
+
+  <build>
+    <plugins>
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <configuration>
+        <descriptors>
+          <descriptor>src/assembly/dist.xml</descriptor>
+        </descriptors>
+        <archive>
+          <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+        </archive>
+      </configuration>
+    </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+     <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <scope>test</scope>
+     </dependency>
+
+    <dependency>
+       <groupId>gnu.getopt</groupId>
+       <artifactId>java-getopt</artifactId>
+       <scope>compile</scope>
+    </dependency> 
+
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>zookeeper</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+       <groupId>com.pcwerk</groupId>
+       <artifactId>seck-lib</artifactId>
+       <scope>compile</scope>
+     </dependency>
+
+  </dependencies>
+
+</project>
+

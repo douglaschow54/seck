@@ -16,6 +16,6 @@ public class HelloWorld extends HttpServlet {
     PrintWriter out = response.getWriter();
     String name = request.getParameter("name");
     out.println("Hello + " + name + "!");
-    out.println("<a href=index.jsp>back to form</a>");
+    out.println("<a href=/>back to form</a>");
   }
 }

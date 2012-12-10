@@ -1,0 +1,52 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.results-list{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+.result-href{
+	font-size: medium;
+	display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: normal;
+    margin: 0px;
+    font-family: arial,sans-serif;
+    line-height: 20px;
+	
+}
+.url{
+	color: #009933;
+    font-style: normal;
+    font-family: arial,sans-serif;
+    font-size: small;
+}
+.offset1 p{
+	color: #222222;
+	line-height: 1.24;
+	font-family: arial,sans-serif;
+    font-size: small;
+}
+.row-fluid .offset1:first-child {
+    margin-left: 0.547%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
