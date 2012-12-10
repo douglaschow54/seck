@@ -1,5 +1,7 @@
 package com.pcwerk.seck;
 
+import com.pcwerk.seck.search.InvertedIndexTable;
+import com.pcwerk.seck.search.LinkAnalysis;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +44,17 @@ public class App {
     System.out.println("command(s):");
     System.out.println("crawl                perform crawling action");
     System.out.println("crawlinfo            display crawled information");
+    System.out.println("index             	perform indexing action");
+    System.out.println("  --file=FILENAME  	start indexing using FILENAME (required)");
+    System.out.println();
+    System.out.println("index-info          output index info to standard output");
+    System.out.println();
+    System.out.println("linkAnalysis        perform link analysis action");
+    System.out.println("  --lambda=VALUE  	start link analysis using VALUE (required)");
+    System.out.println("  --file=FILENAME  	start link analysis using FILENAME (required)");
+    System.out.println();    
+    System.out.println("linkAnalysis-info   doutput link analysis info to standard output");
+    System.out.println();        
     System.out.println("hbasetest            run hbase connection test");
     System.out.println("cmdlinesearch        run command line search");
     System.out.println("options:");
@@ -65,6 +78,26 @@ public class App {
         crawl();
       } else if (command.equals("crawl-info")) {
         crawlInfo();
+      } else if (command.equals("index")) {
+        if (! params.containsKey("file")) {
+          usage();
+          System.exit(0);
+        }
+    	index();
+      } else if (command.equals("index-info")) {
+    	indexInfo();
+      } else if (command.equals("linkAnalysis")) {
+        if (! params.containsKey("file")) {
+          usage();
+          System.exit(0);
+        }
+        if (! params.containsKey("lambda")) {
+          usage();
+          System.exit(0);
+        }
+        linkAnalysis();
+      } else if (command.equals("linkAnalysis-info")) {
+        linkAnalysisInfo();        
       } else if (command.equals("hbasetest")) {
         hbaseTest();
       } else if (command.equals("cmdlinesearch")) {
@@ -161,6 +194,9 @@ public class App {
       case 'f':
         params.put("file", g.getOptarg());
         break;
+      case 'l':
+          params.put("lambda", g.getOptarg());
+          break;          
       case ':':
         System.out.println("You need an argument for option " + (char) g.getOptopt());
         break;
@@ -179,4 +215,45 @@ public class App {
     }
     */
   }
+  
+  
+  private void index() {
+    System.out.println("[i]   indexing starts");
+    
+    String fileName = params.get("file").substring(1);
+    InvertedIndexTable indexer = new InvertedIndexTable();
+    indexer.index(fileName);
+	  
+    System.out.println("[i]   indexing ends");
+  }
+
+  private void indexInfo() {
+	System.out.println("[i]   display information on the indexed data");  
+	
+	InvertedIndexTable indexer = new InvertedIndexTable();
+	indexer.indexInfo();
+  }
+
+  
+  
+  private void linkAnalysis() {
+    System.out.println("[i]   link analysis starts");
+	    
+    String fileName = params.get("file").substring(1);
+	float lambda = Float.parseFloat(params.get("lambda").substring(1));
+	LinkAnalysis linkAnalysis = new LinkAnalysis();
+	linkAnalysis.linkAnalysis(lambda, fileName);
+		  
+	System.out.println("[i]   link analysis ends");
+  }
+
+  private void linkAnalysisInfo() {
+    System.out.println("[i]   display information on the link analysis");  
+    
+    LinkAnalysis linkAnalysis = new LinkAnalysis();
+    linkAnalysis.linkAnalysisInfo();
+		
+  }
+
+  
 }
